@@ -87,7 +87,7 @@ const Register = () => {
                     required
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="w-full pl-10 glass-input"
+                    className="w-full !pl-10 glass-input"
                     placeholder="john_doe"
                   />
                 </div>
@@ -106,7 +106,7 @@ const Register = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-10 glass-input"
+                    className="w-full !pl-10 glass-input"
                     placeholder="john@example.com"
                   />
                 </div>
@@ -124,7 +124,7 @@ const Register = () => {
                     type="tel"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full pl-10 glass-input"
+                    className="w-full !pl-10 glass-input"
                     placeholder="+1 555-0199"
                   />
                 </div>
@@ -143,7 +143,7 @@ const Register = () => {
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full pl-10 glass-input"
+                    className="w-full !pl-10 glass-input"
                     placeholder="••••••••"
                   />
                 </div>
@@ -162,7 +162,7 @@ const Register = () => {
                     required
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full pl-10 glass-input"
+                    className="w-full !pl-10 glass-input"
                     placeholder="••••••••"
                   />
                 </div>

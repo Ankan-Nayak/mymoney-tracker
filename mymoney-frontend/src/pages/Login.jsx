@@ -99,7 +99,7 @@ const Login = () => {
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full pl-10 glass-input"
+                className="w-full !pl-10 glass-input"
                 placeholder="Enter username"
               />
             </div>
@@ -118,7 +118,7 @@ const Login = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-10 glass-input"
+                className="w-full !pl-10 !pr-10 glass-input"
                 placeholder="••••••••"
               />
               <button

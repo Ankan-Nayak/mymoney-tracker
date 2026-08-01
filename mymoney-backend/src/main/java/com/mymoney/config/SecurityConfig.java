@@ -38,17 +38,18 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("/h2-console/**").permitAll()
-                .requestMatchers("/uploads/**").permitAll() // Allow access to uploaded files
-                .anyRequest().authenticated()
-            )
-            // Allow frames for H2 console
-            .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/uploads/**").permitAll() // Allow access to uploaded files
+                        .requestMatchers("/").permitAll() // Permit access to the root URL
+                        .requestMatchers("/health").permitAll() // Permit access to the health endpoint
+                        .anyRequest().authenticated())
+                // Allow frames for H2 console
+                .headers(headers -> headers.frameOptions(frame -> frame.disable()))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -58,8 +59,8 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Allow all origins or specifically frontend URL (Vite uses 5173 by default)
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:5173", "http://localhost:3000"));
+        // Allow all origin patterns to support both local development and deployed frontend URLs
+        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "Cache-Control"));
         configuration.setExposedHeaders(Arrays.asList("Authorization"));
