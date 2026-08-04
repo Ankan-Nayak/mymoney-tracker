@@ -33,7 +33,14 @@ const Register = () => {
       }, 2000);
     } catch (err) {
       console.error(err);
-      setError(err.response?.data?.message || 'Registration failed. Please check inputs.');
+      if (err.response?.data && typeof err.response.data === 'object' && !err.response.data.message) {
+        const errorMsg = Object.entries(err.response.data)
+          .map(([field, msg]) => `${field.charAt(0).toUpperCase() + field.slice(1)}: ${msg}`)
+          .join(', ');
+        setError(errorMsg || 'Registration failed. Please check inputs.');
+      } else {
+        setError(err.response?.data?.message || 'Registration failed. Please check inputs.');
+      }
     } finally {
       setLoading(false);
     }
