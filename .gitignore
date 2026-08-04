@@ -1,0 +1,22 @@
+# Maven build outputs
+mymoney-backend/target/
+**/target/
+
+# Local uploads
+mymoney-backend/uploads/
+**/uploads/
+
+# JVM crash/replay logs and standard logs
+*.log
+hs_err_pid*
+replay_pid*
+
+# Editor and IDE settings
+.idea/
+.vscode/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
