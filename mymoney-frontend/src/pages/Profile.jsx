@@ -127,7 +127,7 @@ const Profile = () => {
                 className="hidden"
               />
               <img
-                src={user?.profilePicture ? `${API_BASE_URL}${user.profilePicture}` : `https://api.dicebear.com/7.x/adventurer/svg?seed=${user?.username}`}
+                src={user?.profilePicture ? (user.profilePicture.startsWith('http://') || user.profilePicture.startsWith('https://') ? user.profilePicture : `${API_BASE_URL}${user.profilePicture}`) : `https://api.dicebear.com/7.x/adventurer/svg?seed=${user?.username}`}
                 alt="Profile Avatar"
                 className="w-32 h-32 rounded-3xl object-cover ring-4 ring-emerald-500/20 group-hover:opacity-75 transition duration-150"
                 onError={(e) => {

@@ -44,6 +44,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(org.springframework.security.core.AuthenticationException.class)
+    public ResponseEntity<?> handleAuthenticationException(org.springframework.security.core.AuthenticationException ex, WebRequest request) {
+        Map<String, Object> errorDetails = new HashMap<>();
+        errorDetails.put("timestamp", LocalDateTime.now());
+        errorDetails.put("message", ex.getMessage());
+        errorDetails.put("details", request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGlobalException(Exception ex, WebRequest request) {
         Map<String, Object> errorDetails = new HashMap<>();

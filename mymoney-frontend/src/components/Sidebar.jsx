@@ -134,7 +134,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         {user && (
           <div className="flex items-center gap-3 p-2 rounded-xl bg-slate-200/10 border border-slate-200/5">
             <img
-              src={user.profilePicture ? `${API_BASE_URL}${user.profilePicture}` : `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.username}`}
+              src={user.profilePicture ? (user.profilePicture.startsWith('http://') || user.profilePicture.startsWith('https://') ? user.profilePicture : `${API_BASE_URL}${user.profilePicture}`) : `https://api.dicebear.com/7.x/adventurer/svg?seed=${user.username}`}
               alt="Avatar"
               className="w-10 h-10 rounded-xl object-cover ring-2 ring-emerald-500/20"
               onError={(e) => {
